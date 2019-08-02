@@ -1,0 +1,125 @@
+---
+title: "Dutch Vignette"
+output:
+  word_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#Part A: How much do Canadians cycle per day
+
+We will determine how much Canadians cycle per day by calculating the average daily energy expenditure from cycling as a form of transportation.
+
+We will use 3 variables in our sample data set which are based off of the 2013/2014 CCHS PUMF and measure cycling as a form of active transportation:
+
+- PAC_8: In the past 3 months did you cycle to and from work or school?
+- PAC_8A: How many times did you cycle to and from work or school, in th past 3 months?
+- PAC_8B:	How much time did you spend on each occasion?
+
+
+**Step 1:** Import your data set to R. 
+
+```{r}
+PA.data <- read.csv("data.sample.csv")
+```
+
+Assumption #1: we assume individuals 65 or older are retired and therefore not cycling to/from work/school. Therefore, we will only evaluate individuals that are < 65 years old.
+
+**Step 2:** Filter the data: < 65. The CCHS data set has categories for age, therefore we will filter out all age categories that are >=65 years old.
+```{r}
+library(dplyr)
+
+PA.data <- PA.data %>%
+  filter(DHHGAGE <= 12)
+```
+
+We will first find the average of cycling per day for individuals that **did** cycle to/from work/school (PAC_8, answer 1) only:
+
+
+**Step 3:** Find the average number of times, that an individual cycled to/from work/school in the past 3 months
+```{r}
+#a. Exclude the missing data - all individuals that did not cycle in the past 3 months: do not cycle to/from work school, do not know, refused to answer, or did not answer
+#Make 996, 997, 998, and 999 to N/A for PAC_8A
+PA.data$PAC_8A[PA.data$PAC_8A == 996] <- NA
+PA.data$PAC_8A[PA.data$PAC_8A == 997] <- NA
+PA.data$PAC_8A[PA.data$PAC_8A == 998] <- NA
+PA.data$PAC_8A[PA.data$PAC_8A == 999] <- NA
+
+#b. Calculate the average number of times that an individual cycled to/from work/school (mean of PAC_8A)
+(freq.cycle <- mean(PA.data$PAC_8A, na.rm = TRUE))
+```
+
+
+**Step 4:** Find the average time spent cycling to/from work/school, in the past 3 months
+```{r}
+#a.	Exclude the missing data - all individuals that did not cycle in the past 3 months: do not cycle to/from work school, do not know, refused to answer, or did not answer
+
+#Make 6, 7, 8, and 9 to N/A  for PAC_8B: 
+PA.data$PAC_8B[PA.data$PAC_8B == 6] <- NA
+PA.data$PAC_8B[PA.data$PAC_8B == 7] <- NA
+PA.data$PAC_8B[PA.data$PAC_8B == 8] <- NA
+PA.data$PAC_8B[PA.data$PAC_8B == 9] <- NA
+
+#b.	Calculate the mean time spent cycling (mean of PAC_8B) in minutes
+(time.cycle <- 15 * mean(PA.data$PAC_8B, na.rm = TRUE))
+
+#d. convert from minutes to hours
+(time.hour.cycle <- time.cycle/60)
+```
+
+
+**Step 5:**	Calculate the average duration of cycling per day
+```{r}
+(duration.cycle <- (time.hour.cycle*freq.cycle)/(30.42*3))
+```
+
+
+**Step 6:** Calculate the average daily energy expenditure (MET-hours) for cycling to/from work/school per day
+```{r}
+(MET.hours.cycle <- (duration.cycle*5.8))
+```
+We now have our average daily energy expenditure (MET-hours) for Canadians that **DO** cycle to/from work/school per day.
+
+
+Now we will account for the entire population, including those that did not cycle to/from work school.
+
+**Step 7:**	Determine the average daily expenditure for all individuals in the population not only those that cycled to/from work/school per day
+```{r}
+#a. porpotion of inividuals that do cycle to/from work/school
+(PA.table.cycle <- table(PA.data$PAC_8))
+(indiv.cycle <- PA.table.cycle[1]/(sum(PA.table.cycle)))
+
+#b.	Calculate the average daily energy expenditure from cycling to/from work/school (MET-hours) for the entire population
+(MET.hours.cycle.all <- MET.hours.cycle*indiv.cycle)
+```
+
+On average a Canadian male only gets 0.016 MET-hours/day from cycling to/from school/work.
+
+
+
+#Part 2: How much do the Dutch cycle/day for transportation purposes
+
+Using data collected as part of the Dutch National Travel Survey (2010 – 2012), Fisherman, 2015 (doi:10.1371/journal.pone.0121871 - Table S1) reported the average additional daily energy expenditure from cycling as a form of transportation for the Dutch: males: 1.3 MET-hours, and females: 1.4 MET-hours. 
+
+The average Dutch daily energy expenditure from cycling as a form of transportation for both sexes is then 1.35 MET-hours.
+
+
+
+#Part 3: Calculate the difference between Dutch and Canadian daily cycling levels
+
+Canadians need to increase their daily energy expenditure from cycling from 0.07 MET-hours to 1.35 MET-hours, in order to be like the Dutch.
+```{r}
+Abs.change <- 1.35 - MET.hours.cycle.all
+```
+
+
+
+#Part 4: Predict how Canadian life expectancy would change if Canadians biked like the Dutch.
+
+Use the Project Big Life Planning Tool.
+
