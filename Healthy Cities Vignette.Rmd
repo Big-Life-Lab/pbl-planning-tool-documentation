@@ -1,0 +1,143 @@
+---
+title: "Healty Cities""
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Part A: Identify the healthiest region
+
+Using the Project Big Life Planning Tool calculate the Summary life expectancy for each region in Canada, and download the summary data set. 
+
+
+1. Identify the healthiest region. 
+```{r}
+#Import the population summary data set
+  #data <- read.csv("pop.data.sample.csv")
+
+#Identify the healthiest region
+  #pop.data.sample[pop.data.sample$SummaryLE == max(pop.data.sample$SummaryLE),]
+```
+
+###Part B: Determine the health behaviours of the healthiest region and the Ottawa region. 
+
+Calculate the average of each health behaviour in the healthiest region: XXX and the Ottawa region.
+
+1. Import your original data set to R. 
+```{r}
+ data <- read.csv("data.sample.csv", header = TRUE)
+```
+
+2. Subset your data for the healthiest region XXX and the Ottawa region. 
+```{r}
+    library(dplyr)
+
+    Ottawa <- data %>%
+      filter(GEODPMF == 35951)
+    
+    XXX <- data %>%
+      filter(GEODPMF == 59922)
+```
+
+3. Calculate the average/prevalence of each health behaviour for the XXX and Ottawa region.
+
+**Smoking**
+
+Calculate the prevalance of current smokers in the XXX and Ottawa region.
+```{r}
+  Ottawa.smokers <- table(Ottawa$SMKDSTY)
+  Ottawa.smokers.prev <- round(prop.table(Ottawa.smokers),2)
+  Ottawa.smokers.prev[1]
+
+  XXX.smokers <- table(XXX$SMKDSTY)
+  XXX.smokers.prev <- round(prop.table(XXX.smokers),2)
+  XXX.smokers.prev[1]
+```
+
+
+**Physical Activity**
+
+Calculate the average of physical activity (varibale PACDEE) in the XXX and Ottawa region.
+a. Exclude the missing data: 'not stated'
+```{r}
+  Ottawa$PACDEE[Ottawa$PACDEE == 99.9] <- NA
+  XXX$PACDEE[XXX$PACDEE == 99.9] <- NA
+```
+
+b. Calculate the average daily energy expenditure for individuals in each region who do have a value for PACDEE
+```{r}
+  Ottawa.PA <- mean(Ottawa$PACDEE, na.rm = TRUE)
+  XXX.PA <- mean(XXX$PACDEE, na.rm = TRUE)
+```  
+
+
+**Alcohol**
+
+Calculate the average of weekly alcohol consumption (varibale ALWDWKY) in the XXX and Ottawa region.
+
+a. Exclude the missing data: 'not stated'
+```{r}
+  Ottawa$ALWDWKY[Ottawa$ALWDWKY == 999] <- NA
+  XXX$ALWDWKY[XXX$ALWDWKY == 999] <- NA
+```
+
+b. Change observations: not applicable to 0. 
+These are individuals who did not drink alcohol in the past year (represented by observations coded as 996 - NA).
+```{r}
+  Ottawa$ALWDWKY[Ottawa$ALWDWKY == 996] <- 0
+  XXX$ALWDWKY[XXX$ALWDWKY == 996] <- 0
+```
+
+c. Calculate the average alcohol consumption for individuals in each region
+```{r}
+  Ottawa.Alcohol <- mean(Ottawa$ALWDWKY, na.rm = TRUE)
+  XXX.Alcohol <- mean(XXX$ALWDWKY, na.rm = TRUE)
+```  
+
+
+**Diet**
+
+An individual's diet is composed of multiple components including the number of daily servings of: carrot, fruit, juice, potato, salad, and vegetable. 
+
+The more daily servings an individual has of:
+
+- carrots, fruits, salad, and vegetables =  the more healthy the individual, 
+- juice = the less healthy the individual,
+- potato < 1 = the more healthy the individual,  and
+- potato > 1 = the less healthy the individual. 
+
+To compare the average diet of each region
+
+
+Calculate the average of each diet component for the XXX and Ottawa region.
+
+a. Eliminate observations: not stated
+
+```{r}
+  Ottawa.diet <- Ottawa %>%
+    select(FVCDCAR, FVCDFRU, FVCDJUI, FVCDPOT, FVCDSAL, FVCDVEG)
+  Ottawa.diet[Ottawa.diet == 999.9] <- NA
+
+  XXX.diet <- XXX %>%
+    select(FVCDCAR, FVCDFRU, FVCDJUI, FVCDPOT, FVCDSAL, FVCDVEG)
+  XXX.diet[XXX.diet == 999.9] <- NA
+```
+
+b. Calculate the average of each diet component for XXX and the Ottawa region.
+```{r}
+  summary(Ottawa.diet)
+  summary(XXX.diet)
+```
+
+**Comparing health behaviours**
+
+4. Compare the averages of all health behaviours in the Ottawa region to the XXX. When the health behaviour for Ottawa is unhealthier then XXX, record the avg/prevalence of that health behaviour for XXX.
+
+
+###Part C: What if Ottawa acted like XXX?
+
+Use the Project Big Life Planning Tool to run an intervention scenario where the Ottawa region acts like XXX.
