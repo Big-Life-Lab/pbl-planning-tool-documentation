@@ -28,6 +28,8 @@ We will use 3 variables in our sample data set which are based off of the 2013/2
 PA.data <- read.csv("data.sample.csv")
 ```
 
+**Reminder:** Although the data.sample.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, data.sample.csv is a completely synthetic data set and can only be used for examplary purposes.
+
 Assumption #1: we assume individuals 65 or older are retired and therefore not cycling to/from work/school. Therefore, we will only evaluate individuals that are < 65 years old.
 
 **Step 2:** Filter the data: < 65. The CCHS data set has categories for age, therefore we will filter out all age categories that are >=65 years old.

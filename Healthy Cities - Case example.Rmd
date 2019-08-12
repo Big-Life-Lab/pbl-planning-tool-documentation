@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Using the Project Big Life Planning Tool calculate the Summary life expectancy for each region in Canada, and download the summary data set. 
 
+**Reminder:** Although the data.sample.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, data.sample.csv is a completely synthetic data set and can only be used for examplary purposes.
 
 1. Identify the healthiest region. 
 ```{r}
