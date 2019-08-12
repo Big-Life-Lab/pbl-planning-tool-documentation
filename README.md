@@ -1,8 +1,8 @@
 # PBL Planning Tool Case Examples
 
-The Project Big Life (PBL) Planning Tool is an application for health professionals to use for health research and planning, as well as the development and evaluation of health interventions. 
+The Project Big Life (PBL) Planning Tool (http://policy.projectbiglife.ca/) is an application for health professionals to use for health research and planning, as well as the development and evaluation of health interventions. 
 
-As part of the PBL Planning Tool guidance there are case examples, which demonstrate how a user can use the PBL planning tool as part of their day-to-day operations. 
+As part of the PBL Planning Tool guidance (https://big-life-lab.github.io/PBL-Planning-Tool-Guidance/) there are case examples, which demonstrate how a user can use the PBL planning tool as part of their day-to-day operations. 
 
 You can download this project onto your computer to work through the examples on your own.
 
