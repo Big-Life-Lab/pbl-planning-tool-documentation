@@ -1,5 +1,5 @@
 ---
-title: "Dutch Vignette"
+title: "Canada bikes like the Dutch"
 output:
   word_document: default
 editor_options: 
@@ -25,7 +25,7 @@ We will use 3 variables in our sample data set which are based off of the 2013/2
 **Step 1:** Import your data set to R. 
 
 ```{r}
-PA.data <- read.csv("data.sample.csv")
+paData <- read.csv("data.sample.csv", header = TRUE)
 ```
 
 **Reminder:** Although the data.sample.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, data.sample.csv is a completely synthetic data set and can only be used for examplary purposes.
@@ -36,7 +36,7 @@ Assumption #1: we assume individuals 65 or older are retired and therefore not c
 ```{r}
 library(dplyr)
 
-PA.data <- PA.data %>%
+paData <- paData %>%
   filter(DHHGAGE <= 12)
 ```
 
@@ -47,13 +47,13 @@ We will first find the average of cycling per day for individuals that **did** c
 ```{r}
 #a. Exclude the missing data - all individuals that did not cycle in the past 3 months: do not cycle to/from work school, do not know, refused to answer, or did not answer
 #Make 996, 997, 998, and 999 to N/A for PAC_8A
-PA.data$PAC_8A[PA.data$PAC_8A == 996] <- NA
-PA.data$PAC_8A[PA.data$PAC_8A == 997] <- NA
-PA.data$PAC_8A[PA.data$PAC_8A == 998] <- NA
-PA.data$PAC_8A[PA.data$PAC_8A == 999] <- NA
+paData$PAC_8A[paData$PAC_8A == 996] <- NA
+paData$PAC_8A[paData$PAC_8A == 997] <- NA
+paData$PAC_8A[paData$PAC_8A == 998] <- NA
+paData$PAC_8A[paData$PAC_8A == 999] <- NA
 
 #b. Calculate the average number of times that an individual cycled to/from work/school (mean of PAC_8A)
-(freq.cycle <- mean(PA.data$PAC_8A, na.rm = TRUE))
+(freqCycle <- mean(paData$PAC_8A, na.rm = TRUE))
 ```
 
 
@@ -62,28 +62,28 @@ PA.data$PAC_8A[PA.data$PAC_8A == 999] <- NA
 #a.	Exclude the missing data - all individuals that did not cycle in the past 3 months: do not cycle to/from work school, do not know, refused to answer, or did not answer
 
 #Make 6, 7, 8, and 9 to N/A  for PAC_8B: 
-PA.data$PAC_8B[PA.data$PAC_8B == 6] <- NA
-PA.data$PAC_8B[PA.data$PAC_8B == 7] <- NA
-PA.data$PAC_8B[PA.data$PAC_8B == 8] <- NA
-PA.data$PAC_8B[PA.data$PAC_8B == 9] <- NA
+paData$PAC_8B[paData$PAC_8B == 6] <- NA
+paData$PAC_8B[paData$PAC_8B == 7] <- NA
+paData$PAC_8B[paData$PAC_8B == 8] <- NA
+paData$PAC_8B[paData$PAC_8B == 9] <- NA
 
 #b.	Calculate the mean time spent cycling (mean of PAC_8B) in minutes
-(time.cycle <- 15 * mean(PA.data$PAC_8B, na.rm = TRUE))
+(timeCycle <- 15 * mean(paData$PAC_8B, na.rm = TRUE))
 
 #d. convert from minutes to hours
-(time.hour.cycle <- time.cycle/60)
+(timeHourCycle <- timeCycle/60)
 ```
 
 
 **Step 5:**	Calculate the average duration of cycling per day
 ```{r}
-(duration.cycle <- (time.hour.cycle*freq.cycle)/(30.42*3))
+(durationCycle <- (timeHourCycle*freqCycle)/(30.42*3))
 ```
 
 
 **Step 6:** Calculate the average daily energy expenditure (MET-hours) for cycling to/from work/school per day
 ```{r}
-(MET.hours.cycle <- (duration.cycle*5.8))
+(metHoursCycle <- (durationCycle*5.8))
 ```
 We now have our average daily energy expenditure (MET-hours) for Canadians that **DO** cycle to/from work/school per day.
 
@@ -93,11 +93,11 @@ Now we will account for the entire population, including those that did not cycl
 **Step 7:**	Determine the average daily expenditure for all individuals in the population not only those that cycled to/from work/school per day
 ```{r}
 #a. porpotion of inividuals that do cycle to/from work/school
-(PA.table.cycle <- table(PA.data$PAC_8))
-(indiv.cycle <- PA.table.cycle[1]/(sum(PA.table.cycle)))
+(paTableCycle <- table(paData$PAC_8))
+(indivCycle <- paTableCycle[1]/(sum(paTableCycle)))
 
 #b.	Calculate the average daily energy expenditure from cycling to/from work/school (MET-hours) for the entire population
-(MET.hours.cycle.all <- MET.hours.cycle*indiv.cycle)
+(metHoursCycleAll <- metHoursCycle*indivCycle)
 ```
 
 On average a Canadian male only gets 0.016 MET-hours/day from cycling to/from school/work.
@@ -116,7 +116,7 @@ The average Dutch daily energy expenditure from cycling as a form of transportat
 
 Canadians need to increase their daily energy expenditure from cycling from 0.07 MET-hours to 1.35 MET-hours, in order to be like the Dutch.
 ```{r}
-Abs.change <- 1.35 - MET.hours.cycle.all
+absChange <- 1.35 - metHoursCycleAll
 ```
 
 

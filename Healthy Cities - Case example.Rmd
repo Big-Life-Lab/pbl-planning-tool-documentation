@@ -50,13 +50,13 @@ Calculate the average of each health behaviour in the healthiest region: XXX and
 
 Calculate the prevalance of current smokers in the XXX and Ottawa region.
 ```{r}
-  Ottawa.smokers <- table(Ottawa$SMKDSTY)
-  Ottawa.smokers.prev <- round(prop.table(Ottawa.smokers),2)
-  Ottawa.smokers.prev[1]
+  smokersOttawa <- table(Ottawa$SMKDSTY)
+  prevSmokersOttawa <- round(prop.table(smokersOttawa),2)
+  prevSmokersOttawa[1]
 
-  XXX.smokers <- table(XXX$SMKDSTY)
-  XXX.smokers.prev <- round(prop.table(XXX.smokers),2)
-  XXX.smokers.prev[1]
+  smokersXXX <- table(XXX$SMKDSTY)
+  prevSmokersXXX <- round(prop.table(smokersXXX),2)
+  prevSmokersXXX[1]
 ```
 
 
@@ -71,8 +71,8 @@ a. Exclude the missing data: 'not stated'
 
 b. Calculate the average daily energy expenditure for individuals in each region who do have a value for PACDEE
 ```{r}
-  Ottawa.PA <- mean(Ottawa$PACDEE, na.rm = TRUE)
-  XXX.PA <- mean(XXX$PACDEE, na.rm = TRUE)
+  paOttawa <- mean(Ottawa$PACDEE, na.rm = TRUE)
+  paXXX <- mean(XXX$PACDEE, na.rm = TRUE)
 ```  
 
 
@@ -95,8 +95,8 @@ These are individuals who did not drink alcohol in the past year (represented by
 
 c. Calculate the average alcohol consumption for individuals in each region
 ```{r}
-  Ottawa.Alcohol <- mean(Ottawa$ALWDWKY, na.rm = TRUE)
-  XXX.Alcohol <- mean(XXX$ALWDWKY, na.rm = TRUE)
+  alcoholOttawa <- mean(Ottawa$ALWDWKY, na.rm = TRUE)
+  alcoholXXX <- mean(XXX$ALWDWKY, na.rm = TRUE)
 ```  
 
 
@@ -119,19 +119,19 @@ Calculate the average of each diet component for the XXX and Ottawa region.
 a. Eliminate observations: not stated
 
 ```{r}
-  Ottawa.diet <- Ottawa %>%
+  dietOttawa <- Ottawa %>%
     select(FVCDCAR, FVCDFRU, FVCDJUI, FVCDPOT, FVCDSAL, FVCDVEG)
-  Ottawa.diet[Ottawa.diet == 999.9] <- NA
+  dietOttawa[dietOttawa == 999.9] <- NA
 
-  XXX.diet <- XXX %>%
+  dietXXX <- XXX %>%
     select(FVCDCAR, FVCDFRU, FVCDJUI, FVCDPOT, FVCDSAL, FVCDVEG)
-  XXX.diet[XXX.diet == 999.9] <- NA
+  dietXXX[dietXXX == 999.9] <- NA
 ```
 
 b. Calculate the average of each diet component for XXX and the Ottawa region.
 ```{r}
-  summary(Ottawa.diet)
-  summary(XXX.diet)
+  summary(dietOttawa)
+  summary(dietXXX)
 ```
 
 **Comparing health behaviours**
