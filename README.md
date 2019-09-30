@@ -1,5 +1,7 @@
 # PBL Planning Tool Case Examples
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 The Project Big Life (PBL) Planning Tool (http://planning.projectbiglife.ca/) is an application for health professionals to use for health research and planning, as well as the development and evaluation of health interventions. 
 
 This repository has the case examples for PBL Planning Tool guide (https://big-life-lab.github.io/PBL-Planning-Tool-Guidance/). 
