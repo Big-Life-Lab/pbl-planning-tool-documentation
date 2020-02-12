@@ -1,0 +1,153 @@
+{
+  "subject": "Smoking",
+  "algorithms": ["MPoRTv2-PUMF"],
+  "description": "Smoking - smoking status (current, former, never smoker)",
+  "scenarios": [
+    {
+      "name": "Smoke-free",
+      "method": "Attribution",
+      "description": "smoking status to zero packyears smoking.",
+      "descriptionDetails": "Respondents who are current or former smokers are recoded to never smokers. Pack-year smoking for all respondents is set to zero. Respondents with missing values are assumed to have the population average smoking status prior to changing their exposure.",
+      "male": {
+        "variables": [
+          {
+            "variableName": "packYears",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_3",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_4",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "packYears",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_3",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "smokeSimp_cat4_4",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Target",
+      "description": "smoking status from current to former. The population prevalence of current smoking will be modified to the target level. The population prevalence of former smokers is modified according to the change in current smoking status.",
+      "descriptionDetails": "See documentation for calculation details. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "% current smokers (target)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "target-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "target-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      }
+    },
+    {
+      "method": "Absolute",
+      "description": "current smoking status by an incremental increase or decrease percent. Change is absolute, expressed as current smoking prevalence.",
+      "descriptionDetails": "See documentation for calculation details. All current smokers have their risk changed by the corresponding population change. E.g., for a 1 percent current smoking decrease and current smoking prevalence of 10%. A respondent who reports current smoking status has their smoking exposure changed from 1 to 0.9, with their former smoking status changed from 0 to 0.1. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "current smokers (change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "absolute-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "absolute-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      }
+    },
+    {
+      "method": "Relative",
+      "description": "current smoking status by an incremental increase or decrease percent. Change is absolute, expressed as a percent (%).",
+      "descriptionDetails": "See documentation for calculation details. All current smokers have their risk changed by the corresponding population change. E.g., for a 10 percent current smoking decrease and current smoking prevalence of 10%. A respondent who reports current smoking status has their smoking exposure changed from 1 to 0.9, with their former smoking status changed from 0 to 0.1. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "% current smokers",
+      "male": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "target-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "smokeSimp_cat4_2",
+            "method": "target-scenario-cat",
+            "targetPop": [1, 1],
+            "scenarioValue": "user-defined",
+            "absorbingVariable": "smokeSimp_cat4_3"
+          }
+        ]
+      }
+    }
+  ]
+}

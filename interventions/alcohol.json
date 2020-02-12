@@ -1,0 +1,118 @@
+{
+  "subject": "Alcohol",
+  "algorithms": ["MPoRTv2-PUMF"],
+  "description": "Alcohol consumption - drinks per week",
+  "scenarios": [
+    {
+      "name": "Healthy drinking guidelines",
+      "method": "Attribution",
+      "reference": "Canada's Low-Risk Alcohol Drinking Guidelines. Canadian Centre on Substance Abuse website: https://www.ccsa.ca. Accessed November 25, 2019",
+      "description": "Canada's Low-Risk Alcohol Drinking Guidelines of no more than 10 drinks a week for women, no more than 15 drinks a week for men.",
+      "descriptionDetails": "Respondents above the guideline are recoded to 0 drinks per week. Other respondents retain their reported value. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "male": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "attribution-scenario",
+            "targetPop": [15.1, null],
+            "scenarioValue": 0
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "attribution-scenario",
+            "targetPop": [10.1, null],
+            "scenarioValue": 0
+          }
+        ]
+      }
+    },
+    {
+      "method": "Target",
+      "description": "alcohol consumption to target level of {{scenarioValue}} drinks per week.",
+      "descriptionDetails": "Respondents below the target level of drinks per week are not changed. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "drinks per week (target)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": ["scenarioValue", null],
+            "postScenarioRange": [0, "scenarioValue"]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": ["scenarioValue", null],
+            "postScenarioRange": [0, "scenarioValue"]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Absolute",
+      "description": "alcohol consumption by an incremental increase or decrease of {{scenarioValue}} drinks per week. Change is absolute, expressed as drinks per week.",
+      "descriptionDetails": "Drinks per week for all respondents is potentially changed. E.g., for a decrease of 1 drink per week, a respondent who reports 0 drinks per week will remain at 0 drinks per week and a respondent who reports 4 drinks per week will be changed to 3 drinks per week. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "drinks per week (change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "absolute-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "absolute-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Relative",
+      "description": "alcohol consumption by an incremental increase or decrease of {{scenarioValue}} drinks per week. Change is relative, expressed as percent (%).",
+      "descriptionDetails": "Drinks per week for all respondents is potentially changed. E.g for a 10% decrease of drinks per week, a respondent who reports 0 drinks per week will remain at 0 drinks per week and a respondent who reports 4 drinks per week will be changed to 3.6 drinks per week. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "drinks per week (% change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "ALWDWKY",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      }
+    }
+  ]
+}
