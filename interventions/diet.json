@@ -1,0 +1,232 @@
+{
+  "subject": "Diet",
+  "algorithms": ["MPoRTv2-PUMF"],
+  "description": "Daily consumption of fruits and vegetables (times per day)",
+  "scenarios": [
+    {
+      "name": "Canadian healthy eating guidelines",
+      "method": "Attribution",
+      "reference": "Taking the Pulse of the Population: An Update on the Health of British Columbians. Office of the Provincial Health Officer: https://www2.gov.bc.ca/. Accessed November 26, 2019; How Healthy Are Canadians? A Trend Analysis of the Health of Canadians from a Healthy Living and Chronic Disease Perspective. Public Health Agency of Canada. https://www.canada.ca/en/public-health/services/publications/healthy-living/how-healthy-canadians.html. Accessed November 26, 2019;  Roblin L, Smith D, Purno N, Mehandra A. Healthy Eating in Ontario: What Do We Know? An Analysis of Eating Behaviours, Food Literacy and Food Insecurity Indicators. Toronto (ON): Nutrition Resource Centre, Ontario Public Health Association; 2017",
+      "description": "the Canadian healthy eating guidelines of consuming fruits and vegetables at least five times per day.",
+      "descriptionDetails": "Respondents above (juice and potatoes) or below (fruits and vegetables) the reference value are recoded to the reference value, all other respondents retain reported value. Reference value = 0 juice, 1 potato, and consume fruits and vegetables at least 5 times per day. Prior to changing values, respondents with missing values are assumed to have the population average.",
+      "male": {
+        "variables": [
+          {
+            "variableName": "Veg_cont",
+            "method": "attribution-scenario-component",
+            "targetPop": [
+              {
+                "variableName": "TotalFruitVeg_cont",
+                "range": [null, 4.9]
+              }
+            ],
+            "parentVariable": "TotalFruitVeg_cont",
+            "scenarioValue": 5
+          },
+          {
+            "variableName": "Juice_cont",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Potato_cont",
+            "method": "attribution-scenario",
+            "scenarioValue": 1,
+            "targetPop": [null, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "Fruit_cont",
+            "method": "attribution-scenario-component",
+            "targetPop": [
+              {
+                "variableName": "TotalFruitVeg_cont",
+                "range": [null, 4.9]
+              }
+            ],
+            "parentVariable": "TotalFruitVeg_cont",
+            "scenarioValue": 5
+          },
+          {
+            "variableName": "Juice_cont",
+            "method": "attribution-scenario",
+            "scenarioValue": 0,
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Potato_cont",
+            "method": "attribution-scenario",
+            "scenarioValue": 1,
+            "targetPop": [null, null]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Target",
+      "description": "total fruit and vegetable consumption to meet the target total fruit and vegetable consumption.",
+      "descriptionDetails": "Total fruit and vegetable consumption is calculated by summing respondents' reported fruit (FVCDFRU), salad (FVCDSAL), carrot (FVCDCAR), and other vegetables (FVCDVEG). Respondents with missing values are assumed to have the population average. Respondents below the target level of total fruit and vegetable consumption are recoded to the target level by adding the difference (target total fruit and vegetable consumption minus reported total fruit and vegetable consumption) to FVCDVEG, all other respondents retain their reported values.",
+      "units": "fruits and vegetables - times/day (target)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "Fruit_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Salad_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Carrot_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Veg_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "Fruit_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Salad_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Carrot_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          },
+          {
+            "variableName": "Veg_cont",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [null, null]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Absolute",
+      "description": "total fruit and vegetable consumption by an incremental increase or decrease of total fruit and vegetable consumption. Change is absolute, expressed as fruits and vegetables - times/day.",
+      "descriptionDetails": "Total fruit and vegetable consumption is changed for all respondents by implementing the incremental increase or decrease on respondents' reported other vegetable consumption (FVCDVEG). Prior to changing values, respondents with missing values are assumed to have the population average.",
+      "units": "fruits and vegetables - times/day (change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "Veg_cont",
+            "method": "absolute-scenario-component",
+            "targetPop": [
+              {
+                "variable name": "TotalFruitVeg_cont",
+                "range": [null, null]
+              }
+            ],
+            "parentVariable": "TotalFruitVeg_cont",
+            "scenarioValue": "user-defined"
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "Veg_cont",
+            "method": "absolute-scenario-component",
+            "targetPop": [
+              {
+                "variable name": "TotalFruitVeg_cont",
+                "range": [null, null]
+              }
+            ],
+            "parentVariable": "TotalFruitVeg_cont",
+            "scenarioValue": "user-defined"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Relative",
+      "description": "total fruit and vegetable consumption by an incremental increase or decrease of total fruit and vegetable consumption. Change is relative, expressed as a percent (%).",
+      "descriptionDetails": "Total fruit and vegetable consumption is changed for all respondents by implementing the incremental increase or decrease on each component of total fruits and vegetables: i.e., reported fruit (FVCDFRU), salad (FVCDSAL), carrot (FVCDCAR), and other vegetables (FVCDVEG). Prior to changing values, respondents with missing values are assumed to have the population average.",
+      "units": "fruits and vegetables - times/day (% change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "Fruit_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Salad_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Carrot_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Veg_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "Fruit_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Salad_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Carrot_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          },
+          {
+            "variableName": "Veg_cont",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined"
+          }
+        ]
+      }
+    }
+  ]
+}

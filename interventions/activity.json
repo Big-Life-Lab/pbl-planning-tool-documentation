@@ -1,0 +1,118 @@
+{
+  "subject": "Activity",
+  "algorithms": ["MPoRTv2-PUMF"],
+  "description": "Physical activity - MET-hours per day",
+  "scenarios": [
+    {
+      "name": "Canadian physical activity guidelines",
+      "method": "Attribution",
+      "reference": "Canadian 24-Hour Movement Guidelines: An Integration of Physical Activity, Sedentary Behaviour, and Sleep. Canadian Society for Exercise Physiology website: https://www.csep.ca/guidelines. Accessed November 22, 2019",
+      "description": "the Canadian Physical Activity Guidelines for Adults (18+ years) of 150 minutes of moderate- to vigorous-intensity activity per week, translated into daily MET-hours.",
+      "descriptionDetails": "Respondents below the reference value are recoded to reference value (2.1 MET-hours/day), all other respondents retain their reported value. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "male": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "attribution-scenario",
+            "scenarioValue": 2.1,
+            "targetPop": [0, 2.1],
+            "postScenarioRange": [2.1, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "attribution-scenario",
+            "scenarioValue": 2.1,
+            "targetPop": [0, 2.1],
+            "postScenarioRange": [2.1, null]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Target",
+      "description": "physical activity to the target level of {{scenarioValue}} MET-hours/day.",
+      "descriptionDetails": "Respondents below the target level of physical activity are recoded to the target level, all other respondents retain their reported value. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "MET-hours/day (target)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [0, "scenarioValue"]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "target-scenario",
+            "scenarioValue": "user-defined",
+            "targetPop": [0, "scenarioValue"]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Absolute",
+      "description": "physical activity by an incremental increase or decrease of {{scenarioValue}} MET-hours/day. Change is absolute, expressed as MET-hours/day.",
+      "descriptionDetails": "Physical activity for each respondent is changed. E.g., for a 1 MET-hour/day increase, a respondent who reports 0 MET-hours/per day will be changed to 1 MET-hour/day. A respondent who reports 4 MET-hours/day will be changed to 5 MET-hours/day. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "MET-hours/day (change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "absolute-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "absolute-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      }
+    },
+    {
+      "method": "Relative",
+      "description": "physical activity by an incremental increase or decrease of {{scenarioValue}} MET-hours/day. Change is relative, expressed as a percent (%).",
+      "descriptionDetails": "Physical activity for each respondent is potentially changed. E.g., for a 10% increase in physical activity, a respondent who reports 0 MET-hours/per day will remain 0 MET-hours/day. A respondent who reports 4 MET-hours/day will be changed to 4.4 MET-hours/day. Respondents with missing values are assumed to have the population average prior to changing their exposure.",
+      "units": "MET-hours/day (% change)",
+      "male": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      },
+      "female": {
+        "variables": [
+          {
+            "variableName": "PACDEE",
+            "method": "relative-scenario",
+            "targetPop": [null, null],
+            "scenarioValue": "user-defined",
+            "postScenarioRange": [0, null]
+          }
+        ]
+      }
+    }
+  ]
+}
