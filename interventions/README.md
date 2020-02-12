@@ -6,4 +6,4 @@ This folder contains all interventions that are available in the Planning Tool.
 
 ## Modifying interventions
 
-If you'd like to create your own intervention, take a look at the [wiki](https://github.com/Big-Life-Lab/pbl-planning-tool-documentation/wiki).
+If you'd like to create your own intervention, take a look at the [wiki](https://github.com/Big-Life-Lab/pbl-planning-tool-documentation/wiki/scenarios).
