@@ -6,7 +6,7 @@ You can download this project onto your computer to work through the examples on
 
 This folder contains:
 
-- Sample data: a synthetic data set for case examples,
+- CCHS data file: A 1% sample of the CCHS 2013 PUMF file. Please visit the [Planning Tool](https://planning.projectbiglife.ca/) for 10% and 100% files
 
 and the R code for the case examples:
 
@@ -19,3 +19,11 @@ and the R code for the case examples:
 - Download this project
 - Unzip the folder on your computer
 - Open `PBL-Planning-Tool-Case-Examples.Rproj` in your RStudio console
+
+### Licenses
+
+#### Statistics Canada
+
+Source from Statistics Canada, Canadian Community Health Survey 2013 PUMF, accessed Jan 2020. Reproduced and distributed on an "as is" basis with the permission of Statistics Canada.
+
+Adapted from Statistics Canada, Canadian Community Health Surveys 2013 PUMF, accessed Jan 2020. This does not constitute an endorsement by Statistics Canada of this product.

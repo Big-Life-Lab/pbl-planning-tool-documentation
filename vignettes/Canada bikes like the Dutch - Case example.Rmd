@@ -2,7 +2,7 @@
 title: "Canada bikes like the Dutch"
 output:
   word_document: default
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -15,20 +15,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We will determine how much Canadians cycle per day by calculating the average daily energy expenditure from cycling as a form of transportation.
 
-We will use 3 variables in our sample data set which are based off of the 2013/2014 CCHS PUMF and measure cycling as a form of active transportation:
+We will use 3 variables in our data set which are based off of the 2013/2014 CCHS PUMF and measure cycling as a form of active transportation:
 
 - PAC_8: In the past 3 months did you cycle to and from work or school?
 - PAC_8A: How many times did you cycle to and from work or school, in th past 3 months?
 - PAC_8B:	How much time did you spend on each occasion?
 
 
-**Step 1:** Import your data set to R. 
+**Step 1:** Import your data set to R.
 
 ```{r}
-paData <- read.csv("data.sample.csv", header = TRUE)
+paData <- read.csv("CCHS-2013-1-percent.csv", header = TRUE)
 ```
 
-**Reminder:** Although the data.sample.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, data.sample.csv is a completely synthetic data set and can only be used for examplary purposes.
+**Reminder:** Although the CCHS-2013-1-percent.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, CCHS-2013-1-percent.csv is a completely synthetic data set and can only be used for examplary purposes.
 
 Assumption #1: we assume individuals 65 or older are retired and therefore not cycling to/from work/school. Therefore, we will only evaluate individuals that are < 65 years old.
 
@@ -61,7 +61,7 @@ paData$PAC_8A[paData$PAC_8A == 999] <- NA
 ```{r}
 #a.	Exclude the missing data - all individuals that did not cycle in the past 3 months: do not cycle to/from work school, do not know, refused to answer, or did not answer
 
-#Make 6, 7, 8, and 9 to N/A  for PAC_8B: 
+#Make 6, 7, 8, and 9 to N/A  for PAC_8B:
 paData$PAC_8B[paData$PAC_8B == 6] <- NA
 paData$PAC_8B[paData$PAC_8B == 7] <- NA
 paData$PAC_8B[paData$PAC_8B == 8] <- NA
@@ -106,7 +106,7 @@ On average a Canadian male only gets 0.016 MET-hours/day from cycling to/from sc
 
 #Part 2: How much do the Dutch cycle/day for transportation purposes
 
-Using data collected as part of the Dutch National Travel Survey (2010 – 2012), Fisherman, 2015 (doi:10.1371/journal.pone.0121871 - Table S1) reported the average additional daily energy expenditure from cycling as a form of transportation for the Dutch: males: 1.3 MET-hours, and females: 1.4 MET-hours. 
+Using data collected as part of the Dutch National Travel Survey (2010 – 2012), Fisherman, 2015 (doi:10.1371/journal.pone.0121871 - Table S1) reported the average additional daily energy expenditure from cycling as a form of transportation for the Dutch: males: 1.3 MET-hours, and females: 1.4 MET-hours.
 
 The average Dutch daily energy expenditure from cycling as a form of transportation for both sexes is then 1.35 MET-hours.
 

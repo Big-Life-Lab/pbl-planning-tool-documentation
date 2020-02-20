@@ -13,12 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Using the Project Big Life Planning Tool calculate the Summary life expectancy for each region in Canada, and download the summary data set. 
 
-**Reminder:** Although the data.sample.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, data.sample.csv is a completely synthetic data set and can only be used for examplary purposes.
+**Reminder:** Although the CCHS-2013-1-percent.csv is based on the 2013/2014 Canadian Community Health Survey Public Use Microdata File, CCHS-2013-1-percent.csv is a completely synthetic data set and can only be used for examplary purposes.
 
 1. Identify the healthiest region. 
 ```{r}
 #Import the population summary data set
-  #data <- read.csv("pop.data.sample.csv")
+  #data <- read.csv("pop.CCHS-2013-1-percent.csv")
 
 #Identify the healthiest region
   #pop.data.sample[pop.data.sample$SummaryLE == max(pop.data.sample$SummaryLE),]
@@ -30,7 +30,7 @@ Calculate the average of each health behaviour in the healthiest region: XXX and
 
 1. Import your original data set to R. 
 ```{r}
- data <- read.csv("data.sample.csv", header = TRUE)
+ data <- read.csv("CCHS-2013-1-percent.csv", header = TRUE)
 ```
 
 2. Subset your data for the healthiest region XXX and the Ottawa region. 
